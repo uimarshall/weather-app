@@ -15,5 +15,8 @@ doc = document.URL;
 
 const para = document.createElement('p');
 para.textContent = `My url is ${doc}`;
+const paraimg = document.createElement('img');
+paraimg.src = "guarantee-200.png"
 
 document.body.appendChild(para);
+document.body.appendChild(paraimg);
