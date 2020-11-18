@@ -1,3 +1,4 @@
+import logo from '../assets/guarantee-200.png';
 const api={
     key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
     baseUrl:"api.openweathermap.org/data/2.5/weather"
@@ -17,7 +18,7 @@ const querySet = (e)=>{
 const fetchResults = async(query)=>{
     query.toLowerCase().trim()
     try {
-        const response = await fetch(`${api.baseUrl}?q=${query}&units=metric&APPID=${api.key}`)
+        const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
         const data =await response.json()
         return data
         
@@ -78,8 +79,9 @@ doc = document.URL;
 
 const para = document.createElement('p');
 para.textContent = `My url is ${doc}`;
+para.style.color = 'white'
 const paraimg = document.createElement('img');
-paraimg.src = "guarantee-200.png"
+paraimg.src = logo
 
 document.body.appendChild(para);
 document.body.appendChild(paraimg);
