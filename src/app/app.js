@@ -1,65 +1,67 @@
 
 const api={
     key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
-    baseUrl:"api.openweathermap.org/data/2.5/weather"
+    baseUrl:"http://api.openweathermap.org/data/2.5/weather"
     // baseUrl:"api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d"
 }
 
 
 
 
-const fetchResults = (query)=>{
-    query.toLowerCase().trim()
+// const fetchResults = (query)=>{
+//     query.toLowerCase().trim()
 
-        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-        fetch("api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d").then(result=>{
-            return result.json()
-        }).then(res=>{
-            init(res)
-        })       
+//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+//         fetch("http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d").then(result=>{
+//             return result.json()
+//         }).then(res=>{
+//             init(res)
+//         })       
   
-}
+// }
 
-const init = (queryResult)=>{
-    console.log(queryResult);
-}
-
-// const querySet = (e)=>{
-//     if (e.keyCode == 13) {
-//         fetchResults(searchField.value)
-//         console.log(searchField.value);
-        
-//     }
+// const init = (queryResult)=>{
+//     console.log(queryResult);
 // }
 const searchField = document.querySelector('.search-box')
-const searchBtn = document.querySelector('#search-btn')
-searchBtn.addEventListener('click', ()=>{
-    let searchValue = searchField.value
-    if (searchValue) {
-        fetchResults(searchValue)
+const querySet = (e)=>{
+    if (e.keyCode == 13) {
+        fetchResults(searchField.value)
+        console.log(searchField.value);
+        searchField.value =""
         
     }
+}
 
-})
-
-// searchField.addEventListener('keypress', querySet)
-
-// const fetchResults = async(query)=>{
-//     // query.toLowerCase().trim()
-//     try {
-//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-//         const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}`)
-//         const data =await response.json()
-//          console.log(data)
-//         return data
-       
-        
-//     } catch (error) {
+// const searchBtn = document.querySelector('#search-btn')
+// searchBtn.addEventListener('click', ()=>{
+//     let searchValue = searchField.value
+//     if (searchValue) {
+//         fetchResults(searchValue)
         
 //     }
-// }
 
-const showResults = (weather)=>{
+// })
+
+searchField.addEventListener('keypress', querySet)
+
+const fetchResults = async(query)=>{
+    query.toLowerCase().trim()
+    try {
+        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+        const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+        const data =await response.json()
+         console.log(data)
+        return data
+       
+       
+        
+    } catch (error) {
+        
+    }
+}
+
+const showResults = async(weather)=>{
     console.log(weather);
     let city = document.querySelector('.location')
     city.textContent = `${weather.name}, ${weather.sys.country}`
@@ -90,7 +92,7 @@ let month = months[dateObj.getMonth()]
 let year = dateObj.getFullYear()
 return `${day} ${date} ${month} ${year}`
 }
-fetchResults().then(data=>showResults(data))
+
 
 
 
@@ -112,9 +114,10 @@ doc = document.URL;
 const para = document.createElement('p');
 para.textContent = `My url is ${doc}`;
 para.style.color = 'white'
-const paraimg = document.createElement('img');
-paraimg.src = logo
+
 
 document.body.appendChild(para);
-document.body.appendChild(paraimg);
+
+export {fetchResults,showResults}
+
 
