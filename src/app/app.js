@@ -1,31 +1,63 @@
-import logo from '../assets/guarantee-200.png';
+
 const api={
     key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
     baseUrl:"api.openweathermap.org/data/2.5/weather"
     // baseUrl:"api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d"
 }
-const searchField = document.querySelector('.search-box')
-searchField.addEventListener('keypress', querySet)
 
-const querySet = (e)=>{
-    if (e.keyCode == 13) {
-        fetchResults(searchField.value)
-        console.log(searchField.value);
-        
-    }
-}
 
-const fetchResults = async(query)=>{
+
+
+const fetchResults = (query)=>{
     query.toLowerCase().trim()
-    try {
-        const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-        const data =await response.json()
-        return data
+
+        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+        fetch("api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d").then(result=>{
+            return result.json()
+        }).then(res=>{
+            init(res)
+        })       
+  
+}
+
+const init = (queryResult)=>{
+    console.log(queryResult);
+}
+
+// const querySet = (e)=>{
+//     if (e.keyCode == 13) {
+//         fetchResults(searchField.value)
+//         console.log(searchField.value);
         
-    } catch (error) {
+//     }
+// }
+const searchField = document.querySelector('.search-box')
+const searchBtn = document.querySelector('#search-btn')
+searchBtn.addEventListener('click', ()=>{
+    let searchValue = searchField.value
+    if (searchValue) {
+        fetchResults(searchValue)
         
     }
-}
+
+})
+
+// searchField.addEventListener('keypress', querySet)
+
+// const fetchResults = async(query)=>{
+//     // query.toLowerCase().trim()
+//     try {
+//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+//         const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}`)
+//         const data =await response.json()
+//          console.log(data)
+//         return data
+       
+        
+//     } catch (error) {
+        
+//     }
+// }
 
 const showResults = (weather)=>{
     console.log(weather);
@@ -35,7 +67,7 @@ const showResults = (weather)=>{
     let now = new Date()
     let date = document.querySelector('.location .date')
     date.textContent = dateBuilder(now)
-    let temp = document.querySelector('.latest .temp')
+    let temp = document.querySelector('.latest .temp-value')
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>&deg;C</span>`
     let weatherElem = document.querySelector('.latest .weather')
     weatherElem.textContent = weather.weather[0].main

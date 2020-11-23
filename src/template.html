@@ -14,15 +14,26 @@
 					class="search-box"
 					placeholder="Search for a city..."
 				/>
+				<button type="submit" id="search-btn">Search</button>
 			</header>
 			<main>
 				<div class="weather-details">
 					<section class="location">
+						<div class="title"><h1>Weather</h1></div>
+						<div class="notification"></div>
+						<div class="weather-icon">
+							<img id="weather-icon" />
+						</div>
+
 						<div class="city">Lagos, NG</div>
 						<div class="date">Tuesday 16 November, 2020</div>
 					</section>
 					<div class="latest">
-						<div class="temp">16<span>&deg;</span></div>
+						<div class="temp-value">
+							- &deg;
+							<span>C</span>
+						</div>
+						<hr />
 						<div class="weather">Sunny</div>
 						<!-- <div class="weather-range">13&deg;/17&deg;</div> -->
 					</div>

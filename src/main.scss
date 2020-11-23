@@ -66,7 +66,7 @@ main {
 }
 .location .city,
 .location .date,
-.latest .temp {
+.latest .temp-value {
 	color: #fff;
 }
 .location .city {
@@ -79,14 +79,14 @@ main {
 	font-size: 1rem;
 }
 
-.latest .temp {
+.latest .temp-value {
 	color: #fff;
 	font-size: 6rem;
 	font-weight: 900;
 	margin: 1rem 0;
 	text-shadow: 2px 6px rgba($color: #000000, $alpha: 0.8);
 }
-.latest .temp span {
+.latest .temp-value span {
 	font-weight: 500;
 }
 .latest .weather {
