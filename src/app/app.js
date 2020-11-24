@@ -5,7 +5,6 @@ weatherInfo.temperature = {
     unit: "celcius"
 }
 
-const KELVIN = 273
 
 
 const api={
@@ -15,28 +14,7 @@ const api={
     // baseUrl:"api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d"
 }
 
-// check if browser supports geolocation
-// let notification = document.querySelector('.location .notification')
-// if ('geolocation' in navigator) {
-//     navigator.geolocation.getCurrentPosition(setUserPosition, showError)
-    
-// }else{
-//     notification.style.display = "block"
-//     notification.innerHTML = `<p>It seems your browser doesn't Support Geolocation</p>`
-// }
 
-// // Set Users Coordinates
-// const setUserPosition = (position)=>{
-//     let lat = position.coords.latitude
-//     let long = position.coords.longitude
-//     getWeather(lat, long)
-// }
-// const showError=(error)=>{
-
-//      notification.style.display = "block"
-//     notification.innerHTML = `<p>${error.message}</p>`
-
-// }
 const spinner = document.getElementById("spinner");
 
 function showSpinner() {
@@ -226,27 +204,6 @@ searchBtn.addEventListener('click', (e)=>{
 
 
 
-let doc;
-doc = document;
-doc = document.head;
-doc = document.body;
-doc = document.doctype;
-doc = document.domain;
-doc = document.documentURI;
-doc = document.URL;
-// doc = document.contentType;
-// doc = document.characterSet;
-// doc = document.links;
-// doc = document.links[0].classList;
-// doc = document.links[0].className;
-// doc = document.images;
-
-const para = document.createElement('p');
-para.textContent = `My url is ${doc}`;
-para.style.color = 'white'
-
-
-document.body.appendChild(para);
 
 // export {fetchResults,showResults}
 
