@@ -8,58 +8,95 @@ const api={
 
 
 
-// const fetchResults = (query)=>{
-//     query.toLowerCase().trim()
-
-//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-//         fetch("http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d").then(result=>{
-//             return result.json()
-//         }).then(res=>{
-//             init(res)
-//         })       
+const fetchResults = (query)=>{
+        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+        fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`).then(result=>{
+            return result.json()
+        }).then(res=>{
+            init(res)
+        })       
   
-// }
-
-// const init = (queryResult)=>{
-//     console.log(queryResult);
-// }
-const searchField = document.querySelector('.search-box')
-const querySet = (e)=>{
-    if (e.keyCode == 13) {
-        fetchResults(searchField.value)
-        console.log(searchField.value);
-        searchField.value =""
-        
-    }
 }
 
-// const searchBtn = document.querySelector('#search-btn')
-// searchBtn.addEventListener('click', ()=>{
-//     let searchValue = searchField.value
-//     if (searchValue) {
-//         fetchResults(searchValue)
+const init = (queryResult)=>{
+    console.log(queryResult);
+    switch (queryResult.weather[0].main) {
+        case 'Clear':
+            document.body.style.backgroundImage = 'url("src/assets/clear_bg.jpg")'
+            
+            break;
+        case 'Thunderstorm':
+            document.body.style.backgroundImage = 'url("src/assets/stormy_bg.jpg")'
+            
+            break;
+        case 'Rain':
+        case 'Drizzle':
+            document.body.style.backgroundImage = 'url("src/assets/rainy_bg.jpg")'
+            
+            break;
+        case 'Fog':
+            document.body.style.backgroundImage = 'url("src/assets/foggy_bg.jpg")'
+            
+            break;
+        case 'Snow':
+            document.body.style.backgroundImage = 'url("src/assets/snow_bg.jpg")'
+            
+            break;
+        case 'Clouds':
+            document.body.style.backgroundImage = 'url("src/assets/cloudy_bg.jpg")'
+            
+            break;
+       
+    
+        default:
+            break;
+    }
+
+}
+
+const searchField = document.querySelector('.search-box')
+const searchBtn = document.querySelector('#search-btn')
+searchBtn.addEventListener('click', ()=>{
+    let searchValue = searchField.value
+    if (searchValue) {
+        searchValue.toLowerCase().trim()
+        fetchResults(searchValue)
+         searchField.value =""
+        
+    }
+
+})
+
+
+
+// const querySet = (e)=>{
+//     if (e.keyCode == 13) {
+//         fetchResults(searchField.value)
+//         console.log(searchField.value);
+//         searchField.value =""
         
 //     }
+// }
 
-// })
+// searchField.addEventListener('keypress', querySet)
 
-searchField.addEventListener('keypress', querySet)
 
-const fetchResults = async(query)=>{
-    query.toLowerCase().trim()
-    try {
-        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-        const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-        const data =await response.json()
-         console.log(data)
-        return data
+// const fetchResults = async(query)=>{
+//     query.toLowerCase().trim()
+//     try {
+//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+//         const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+//         const data =await response.json()
+//          console.log(data)
+//         return data
        
        
         
-    } catch (error) {
+//     } catch (error) {
         
-    }
-}
+//     }
+// }
+
 
 const showResults = async(weather)=>{
     console.log(weather);
@@ -118,6 +155,6 @@ para.style.color = 'white'
 
 document.body.appendChild(para);
 
-export {fetchResults,showResults}
+// export {fetchResults,showResults}
 
 
