@@ -20,10 +20,10 @@ header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 4rem 1rem 1rem;
+	padding: 3rem 1rem 1rem;
 }
 header input {
-	width: 100%;
+	width: 70%;
 	max-width: 16rem;
 	padding: 0.5rem 1rem;
 	border: none;
@@ -32,12 +32,26 @@ header input {
 	border-bottom: 4px solid #8cf5f5;
 	color: #fff;
 	font-size: 1.5rem;
-	font-weight: 400;
+	font-weight: 100;
 	transition: 0.25s ease-in-out;
 	background-color: #fff;
 	background-image: url("./assets/search_icon.png");
 	background-repeat: no-repeat;
 	background-position: 9px 10px;
+}
+header button {
+	width: 30%;
+	max-width: 10rem;
+	padding: 0.5rem 1rem;
+	margin-left: 1rem;
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	color: #fff;
+	font-size: 1rem;
+	font-weight: 100;
+	transition: 0.25s ease-in-out;
+	background-color: #eb6868;
 }
 
 input::placeholder {
@@ -60,19 +74,36 @@ main {
 	text-align: center;
 	padding: 2rem 2rem 3rem;
 }
+.title {
+	color: #eb6868;
+	background-color: #ffffff;
+	padding: 0.2rem 0.3rem;
+	font-family: "Roboto Mono", monospace;
+	font-weight: 200;
+	border-radius: 10px;
+}
+
 .weather-details {
 	padding: 10px 25px;
 	background-color: rgba($color: #ffffff, $alpha: 0.2);
+	border-radius: 5px;
+	margin-bottom: 1rem;
 }
 .location .city,
-.location .date,
-.latest .temp-value {
+.latest .temp-value,
+#date {
 	color: #fff;
 }
+
 .location .city {
 	font-size: 2rem;
 	font-weight: 500;
 	margin-bottom: 0.3rem;
+}
+
+.location .notification {
+	color: #921919;
+	font-size: 1.2rem;
 }
 
 .location .date {
@@ -81,10 +112,11 @@ main {
 
 .latest .temp-value {
 	color: #fff;
-	font-size: 6rem;
-	font-weight: 900;
-	margin: 1rem 0;
+	font-size: 5rem;
+	font-weight: 700;
+	margin: 0.2rem 0;
 	text-shadow: 2px 6px rgba($color: #000000, $alpha: 0.8);
+	cursor: pointer;
 }
 .latest .temp-value span {
 	font-weight: 500;
@@ -92,8 +124,41 @@ main {
 .latest .weather {
 	color: #fff;
 	font-size: 2rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
+	font-weight: 400;
+	margin-bottom: 0.5rem;
 	text-shadow: 0 3px rgba($color: #000000, $alpha: 0.5);
 	font-style: oblique;
+}
+
+// Spinner
+#spinner {
+	visibility: hidden;
+	width: 80px;
+	height: 80px;
+
+	border: 2px solid #f3f3f3;
+	border-top: 3px solid #f25a41;
+	border-radius: 100%;
+
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+
+	animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+#spinner.show {
+	visibility: visible;
 }

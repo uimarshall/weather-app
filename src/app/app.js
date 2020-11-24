@@ -1,25 +1,84 @@
+const weatherInfo = {
+    
+}
+weatherInfo.temperature = {
+    unit: "celcius"
+}
+
+const KELVIN = 273
+
 
 const api={
     key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
-    baseUrl:"http://api.openweathermap.org/data/2.5/weather"
+    baseUrl:"http://api.openweathermap.org/data/2.5/weather",
+    weatherIconUrl:"http://openweathermap.org/img/wn/"
     // baseUrl:"api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d"
 }
 
+// check if browser supports geolocation
+// let notification = document.querySelector('.location .notification')
+// if ('geolocation' in navigator) {
+//     navigator.geolocation.getCurrentPosition(setUserPosition, showError)
+    
+// }else{
+//     notification.style.display = "block"
+//     notification.innerHTML = `<p>It seems your browser doesn't Support Geolocation</p>`
+// }
 
+// // Set Users Coordinates
+// const setUserPosition = (position)=>{
+//     let lat = position.coords.latitude
+//     let long = position.coords.longitude
+//     getWeather(lat, long)
+// }
+// const showError=(error)=>{
+
+//      notification.style.display = "block"
+//     notification.innerHTML = `<p>${error.message}</p>`
+
+// }
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 5000);
+}
+
+function hideSpinner() {
+  spinner.className = spinner.className.replace("show", "");
+}
+
+
+
+let notification = document.querySelector('.location .notification')
 
 
 const fetchResults = (query)=>{
+    showSpinner()
         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
         fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`).then(result=>{
+            hideSpinner()
             return result.json()
         }).then(res=>{
             init(res)
-        })       
+        }).catch(() => {
+            
+    notification.textContent = "Please search for a valid city";
+  });
+  notification.textContent = ""       
   
 }
 
-const init = (queryResult)=>{
-    console.log(queryResult);
+const init =async (queryResult)=>{
+    if (queryResult.cod == "404") {
+
+        notification.textContent = `${queryResult.message}, Please search for a valid city!`
+        notification.style.marginBottom = "10px" 
+       
+    }else{
+        console.log(queryResult);
     switch (queryResult.weather[0].main) {
         case 'Clear':
             document.body.style.backgroundImage = 'url("src/assets/clear_bg.jpg")'
@@ -51,21 +110,18 @@ const init = (queryResult)=>{
         default:
             break;
     }
+     let weatherIcon = await document.getElementById('weather-icon')
+     console.log(weatherIcon);
+     weatherIcon.src = await `${api.weatherIconUrl}${queryResult.weather[0].icon}@2x.png`
+    showWeatherResults(queryResult)
+    }
+
+    
+   
 
 }
 
-const searchField = document.querySelector('.search-box')
-const searchBtn = document.querySelector('#search-btn')
-searchBtn.addEventListener('click', ()=>{
-    let searchValue = searchField.value
-    if (searchValue) {
-        searchValue.toLowerCase().trim()
-        fetchResults(searchValue)
-         searchField.value =""
-        
-    }
 
-})
 
 
 
@@ -98,19 +154,41 @@ searchBtn.addEventListener('click', ()=>{
 // }
 
 
-const showResults = async(weather)=>{
+const showWeatherResults = (weather)=>{
     console.log(weather);
-    let city = document.querySelector('.location')
+    let city = document.querySelector('.location .city')
     city.textContent = `${weather.name}, ${weather.sys.country}`
+    
 
     let now = new Date()
-    let date = document.querySelector('.location .date')
-    date.textContent = dateBuilder(now)
+    console.log(now);
+    let dateNow = document.getElementById('date')
+    console.log(dateNow);
+    dateNow.textContent = dateBuilder(now)
     let temp = document.querySelector('.latest .temp-value')
     temp.innerHTML = `${Math.round(weather.main.temp)}<span>&deg;C</span>`
+    temp.addEventListener("click", ()=>{
+        if (weather.main.temp === undefined) return 
+            
+        if (weatherInfo.temperature.unit == "celcius") {
+            let fahrenheit = celciusToFahrenheit(weather.main.temp)
+            fahrenheit = Math.floor(fahrenheit)
+            temp.innerHTML = `${fahrenheit}&deg;<span>F</span>`
+            weatherInfo.temperature.unit = "fahrenheit"
+            
+        }else{
+            temp.innerHTML = `${Math.round(weather.main.temp)}&deg;<span>C</span>`
+            weatherInfo.temperature.unit = "celcius"
+        }
+    })
     let weatherElem = document.querySelector('.latest .weather')
-    weatherElem.textContent = weather.weather[0].main
+    weatherElem.textContent = `${weather.weather[0].main} - ${weather.weather[0].description}`
 
+
+}
+
+const celciusToFahrenheit=(temp)=>{
+    return (temp * 9/5) + 32
 
 }
 
@@ -129,6 +207,21 @@ let month = months[dateObj.getMonth()]
 let year = dateObj.getFullYear()
 return `${day} ${date} ${month} ${year}`
 }
+
+const searchField = document.querySelector('.search-box')
+const searchBtn = document.querySelector('#search-btn')
+searchBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    let searchValue = searchField.value
+    searchValue.trim()
+    if (searchValue) {
+        
+        fetchResults(searchValue)
+         searchField.value =""
+        
+    }
+
+})
 
 
 
