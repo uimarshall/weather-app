@@ -1,17 +1,18 @@
-import sayName from './alertService';
 
-const component = () => {
-  const element = document.createElement('div');
-  element.className = 'say-name';
-  element.style.color = '#fff';
 
-  element.innerHTML = sayName('Marshall');
-  // value of the function when called
-  return element;
-};
+const spinner = document.getElementById("spinner");
 
-const render = () => {
-  document.body.appendChild(component());
-};
+const showSpinner=() =>{
+  spinner.className = "show";
+  setTimeout(() => {
+    spinner.className = spinner.className.replace("show", "");
+  }, 5000);
+}
 
-export { component, render };
+const hideSpinner=() =>{
+  spinner.className = spinner.className.replace("show", "");
+}
+
+
+
+export {showSpinner,hideSpinner}

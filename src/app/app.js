@@ -1,3 +1,4 @@
+import {showSpinner, hideSpinner} from './componentService';
 const weatherInfo = {
     
 }
@@ -11,22 +12,10 @@ const api={
     key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
     baseUrl:"http://api.openweathermap.org/data/2.5/weather",
     weatherIconUrl:"http://openweathermap.org/img/wn/"
-    // baseUrl:"api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=bb2a614797cbd1ce08fb2ad4664e9b9d"
 }
 
 
-const spinner = document.getElementById("spinner");
 
-function showSpinner() {
-  spinner.className = "show";
-  setTimeout(() => {
-    spinner.className = spinner.className.replace("show", "");
-  }, 5000);
-}
-
-function hideSpinner() {
-  spinner.className = spinner.className.replace("show", "");
-}
 
 
 
@@ -35,7 +24,7 @@ let notification = document.querySelector('.location .notification')
 
 const fetchResults = (query)=>{
     showSpinner()
-        // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
+       
         fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`).then(result=>{
             hideSpinner()
             return result.json()
@@ -49,6 +38,7 @@ const fetchResults = (query)=>{
   
 }
 
+
 const init =async (queryResult)=>{
     if (queryResult.cod == "404") {
 
@@ -57,7 +47,7 @@ const init =async (queryResult)=>{
        
     }else{
         console.log(queryResult);
-    switch (queryResult.weather[0].main) {
+         switch (queryResult.weather[0].main) {
         case 'Clear':
             document.body.style.backgroundImage = 'url("src/assets/clear_bg.jpg")'
             
@@ -88,6 +78,7 @@ const init =async (queryResult)=>{
         default:
             break;
     }
+   
      let weatherIcon = await document.getElementById('weather-icon')
      console.log(weatherIcon);
      weatherIcon.src = await `${api.weatherIconUrl}${queryResult.weather[0].icon}@2x.png`
@@ -102,34 +93,6 @@ const init =async (queryResult)=>{
 
 
 
-
-// const querySet = (e)=>{
-//     if (e.keyCode == 13) {
-//         fetchResults(searchField.value)
-//         console.log(searchField.value);
-//         searchField.value =""
-        
-//     }
-// }
-
-// searchField.addEventListener('keypress', querySet)
-
-
-// const fetchResults = async(query)=>{
-//     query.toLowerCase().trim()
-//     try {
-//         // const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-//         const response = await fetch(`${api.baseUrl}?q=${query}&APPID=${api.key}&units=metric`)
-//         const data =await response.json()
-//          console.log(data)
-//         return data
-       
-       
-        
-//     } catch (error) {
-        
-//     }
-// }
 
 
 const showWeatherResults = (weather)=>{
@@ -190,6 +153,7 @@ const searchField = document.querySelector('.search-box')
 const searchBtn = document.querySelector('#search-btn')
 searchBtn.addEventListener('click', (e)=>{
     e.preventDefault();
+
     let searchValue = searchField.value
     searchValue.trim()
     if (searchValue) {
@@ -198,6 +162,8 @@ searchBtn.addEventListener('click', (e)=>{
          searchField.value =""
         
     }
+    
+
 
 })
 
@@ -205,6 +171,6 @@ searchBtn.addEventListener('click', (e)=>{
 
 
 
-// export {fetchResults,showResults}
+
 
 
