@@ -1,3 +1,4 @@
+require('dotenv').config()
 import {showSpinner, hideSpinner} from './componentService';
 const weatherInfo = {
     
@@ -9,7 +10,8 @@ weatherInfo.temperature = {
 
 
 const api={
-    key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
+    // key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
+    key: process.env.API,
     baseUrl:"http://api.openweathermap.org/data/2.5/weather",
     weatherIconUrl:"http://openweathermap.org/img/wn/"
 }
