@@ -2,7 +2,7 @@
 
 ![Hireable](https://img.shields.io/badge/Hireable-yes-success) ![](https://img.shields.io/badge/-Microverse%20projects-blueviolet)
 
-# This Project is Restaurant app build using JavaScript to render the page. It is a simple weather app which displays the weather details of places.
+# This Project is Weather app build using JavaScript to render the page. It is a simple weather app which displays the weather details of places.
 
 
 > In this project, i built a `Weather` app following the [OdinProject](https://www.theodinproject.com/courses/javascript/lessons/weather-app) specification.<br>
