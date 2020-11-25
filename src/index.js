@@ -8,7 +8,7 @@ searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
   const searchValue = searchField.value;
-  
+
   if (searchValue) {
     fetchResults(searchValue);
     searchField.value = '';

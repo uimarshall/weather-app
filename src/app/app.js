@@ -11,7 +11,7 @@ weatherInfo.temperature = {
 
 const api = {
   // key: process.env.API,
-  key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
+  key: 'bb2a614797cbd1ce08fb2ad4664e9b9d',
   baseUrl: 'https://api.openweathermap.org/data/2.5/weather',
   weatherIconUrl: 'https://openweathermap.org/img/wn/',
 };
@@ -118,7 +118,6 @@ const fetchResults = (query) => {
   }).then(res => {
     init(res);
   }).catch(() => {
-    console.log(err)
     notification.textContent = 'Please search for a valid city';
   });
   notification.textContent = '';
