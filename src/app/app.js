@@ -114,9 +114,9 @@ const fetchResults = (query) => {
     init(res);
   }).catch(() => {
     console.log(err)
-    // notification.textContent = 'Please search for a valid city';
+    notification.textContent = 'Please search for a valid city';
   });
-  // notification.textContent = '';
+  notification.textContent = '';
 };
 
 
