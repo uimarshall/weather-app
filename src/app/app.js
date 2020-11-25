@@ -11,8 +11,8 @@ weatherInfo.temperature = {
 
 const api = {
   key: process.env.API,
-  baseUrl: 'http://api.openweathermap.org/data/2.5/weather',
-  weatherIconUrl: 'http://openweathermap.org/img/wn/',
+  baseUrl: 'https://api.openweathermap.org/data/2.5/weather',
+  weatherIconUrl: 'https://openweathermap.org/img/wn/',
 };
 
 /** getDay() is an integer corresponding to the day of the week:
@@ -113,9 +113,10 @@ const fetchResults = (query) => {
   }).then(res => {
     init(res);
   }).catch(() => {
-    notification.textContent = 'Please search for a valid city';
+    console.log(err)
+    // notification.textContent = 'Please search for a valid city';
   });
-  notification.textContent = '';
+  // notification.textContent = '';
 };
 
 
