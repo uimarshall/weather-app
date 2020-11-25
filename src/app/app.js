@@ -10,7 +10,8 @@ weatherInfo.temperature = {
 
 
 const api = {
-  key: process.env.API,
+  // key: process.env.API,
+  key: "bb2a614797cbd1ce08fb2ad4664e9b9d",
   baseUrl: 'https://api.openweathermap.org/data/2.5/weather',
   weatherIconUrl: 'https://openweathermap.org/img/wn/',
 };
@@ -89,6 +90,10 @@ const init = async (queryResult) => {
         break;
       case 'Clouds':
         document.body.style.backgroundImage = 'url("src/assets/cloudy_bg.jpg")';
+
+        break;
+      case 'Haze':
+        document.body.style.backgroundImage = 'url("src/assets/haze_bg.jpg")';
 
         break;
 
