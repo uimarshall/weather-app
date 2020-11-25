@@ -68,7 +68,7 @@ const init = async (queryResult) => {
   } else {
     switch (queryResult.weather[0].main) {
       case 'Clear':
-        document.body.style.backgroundImage = 'url("../src/assets/clear_bg.jpg")';
+        document.body.style.backgroundImage = 'url("/src/assets/clear_bg.jpg")';
 
         break;
       case 'Thunderstorm':
