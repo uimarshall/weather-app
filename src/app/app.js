@@ -68,32 +68,32 @@ const init = async (queryResult) => {
   } else {
     switch (queryResult.weather[0].main) {
       case 'Clear':
-        document.body.style.backgroundImage = 'url("src/assets/clear_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/clear_bg.jpg")';
 
         break;
       case 'Thunderstorm':
-        document.body.style.backgroundImage = 'url("src/assets/stormy_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/stormy_bg.jpg")';
 
         break;
       case 'Rain':
       case 'Drizzle':
-        document.body.style.backgroundImage = 'url("src/assets/rainy_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/rainy_bg.jpg")';
 
         break;
       case 'Fog':
-        document.body.style.backgroundImage = 'url("src/assets/foggy_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/foggy_bg.jpg")';
 
         break;
       case 'Snow':
-        document.body.style.backgroundImage = 'url("src/assets/snow_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/snow_bg.jpg")';
 
         break;
       case 'Clouds':
-        document.body.style.backgroundImage = 'url("src/assets/cloudy_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/cloudy_bg.jpg")';
 
         break;
       case 'Haze':
-        document.body.style.backgroundImage = 'url("src/assets/haze_bg.jpg")';
+        document.body.style.backgroundImage = 'url("../src/assets/haze_bg.jpg")';
 
         break;
 
